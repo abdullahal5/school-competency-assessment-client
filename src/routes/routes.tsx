@@ -7,6 +7,8 @@ import DashboardLayout from "../components/layout/DashbaordLayout";
 import Home from "../pages/admin/Home";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 import Question from "../pages/admin/question/Question";
+import Competency from "../pages/admin/competency/Competency";
+import Test from "../pages/admin/test/Test";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "questions",
         element: <Question />,
+      },
+      {
+        path: "competency",
+        element: <Competency />,
+      },
+      {
+        path: "test-session",
+        element: <Test />,
       },
     ],
   },

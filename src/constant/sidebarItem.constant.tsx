@@ -1,6 +1,7 @@
 import {
   DashboardOutlined,
   FileOutlined,
+  FundProjectionScreenOutlined,
   QuestionOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
@@ -24,6 +25,24 @@ export const getMenuItemsByRole = (user?: User | null): MenuProps["items"] => {
         key: "2",
         icon: <QuestionOutlined />,
         label: <Link to={`/${user?.role}/dashboard/questions`}>Questions</Link>,
+        style: { marginBottom: "8px" },
+      },
+      {
+        key: "3",
+        icon: <FundProjectionScreenOutlined />,
+        label: (
+          <Link to={`/${user?.role}/dashboard/competency`}>Competency</Link>
+        ),
+        style: { marginBottom: "8px" },
+      },
+      {
+        key: "4",
+        icon: <FileOutlined />,
+        label: (
+          <Link to={`/${user?.role}/dashboard/test-session`}>
+            Test-Sessions
+          </Link>
+        ),
         style: { marginBottom: "8px" },
       },
     ],

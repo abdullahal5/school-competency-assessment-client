@@ -1,3 +1,4 @@
+import type { GetApiResponse, IQuestion } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const questionApi = baseApi.injectEndpoints({
@@ -8,13 +9,22 @@ const questionApi = baseApi.injectEndpoints({
         method: "POST",
         data: questionData,
       }),
+      invalidatesTags: ["questions"],
     }),
 
     getQuestions: builder.query({
-      query: () => ({
+      query: (args: Record<string, unknown>) => ({
         url: "/questions",
         method: "GET",
+        params: args,
       }),
+      transformResponse: (response: GetApiResponse<IQuestion[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+      providesTags: ["questions"],
     }),
 
     getQuestionById: builder.query({
@@ -22,6 +32,7 @@ const questionApi = baseApi.injectEndpoints({
         url: `/questions/${id}`,
         method: "GET",
       }),
+      providesTags: ["questions"],
     }),
 
     updateQuestion: builder.mutation({
@@ -30,6 +41,7 @@ const questionApi = baseApi.injectEndpoints({
         method: "PATCH",
         data: patch,
       }),
+      invalidatesTags: ["questions"],
     }),
 
     softDeleteQuestion: builder.mutation({
@@ -37,6 +49,7 @@ const questionApi = baseApi.injectEndpoints({
         url: `/questions/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["questions"],
     }),
   }),
 });
