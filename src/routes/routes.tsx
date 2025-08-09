@@ -3,39 +3,16 @@ import App from "../App";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
+import DashboardLayout from "../components/layout/DashbaordLayout";
+import Home from "../pages/admin/Home";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
+import Question from "../pages/admin/question/Question";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
   },
-  // {
-  //   path: "/admin",
-  //   element: (
-  //     <ProtectedRoute role="admin">
-  //       <App />
-  //     </ProtectedRoute>
-  //   ),
-  //   children: routeGenerator(adminPaths),
-  // },
-  // {
-  //   path: "/supervisor",
-  //   element: (
-  //     <ProtectedRoute role="supervisor">
-  //       <App />
-  //     </ProtectedRoute>
-  //   ),
-  //   children: routeGenerator(facultyPaths),
-  // },
-  // {
-  //   path: "/student",
-  //   element: (
-  //     <ProtectedRoute role="student">
-  //       <App />
-  //     </ProtectedRoute>
-  //   ),
-  //   children: routeGenerator(studentPaths),
-  // },
   {
     path: "/login",
     element: <Login />,
@@ -47,6 +24,24 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/admin/dashboard",
+    element: (
+      <ProtectedRoute role="admin">
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "questions",
+        element: <Question />,
+      },
+    ],
   },
 ]);
 

@@ -77,7 +77,7 @@ const Login = () => {
         );
 
         toast.success("Login successful");
-        navigate(`/`);
+        navigate(`/${decodedUser.role}/dashboard`);
       }
     } catch {
       toast.error("Invalid credentials");

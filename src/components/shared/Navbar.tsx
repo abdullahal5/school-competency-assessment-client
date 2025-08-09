@@ -23,7 +23,7 @@ import { baseApi } from "../../redux/api/baseApi";
 
 export default function Navbar() {
   const dispatch = useAppDispatch();
-  const token = useAppSelector((state) => state.auth.token);
+  const { token } = useAppSelector((state) => state.auth);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
@@ -84,7 +84,7 @@ export default function Navbar() {
     {
       key: "dashboard",
       label: (
-        <Link to="/dashboard">
+        <Link to={`${user?.role}/dashboard`}>
           <div className="flex items-center gap-2">
             <DashboardOutlined />
             <span>Dashboard</span>
